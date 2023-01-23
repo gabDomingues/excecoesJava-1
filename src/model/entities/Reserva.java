@@ -43,18 +43,17 @@ public class Reserva {
 		return duracao.toDays();
 	}
 
-	public String atualizarDatas(LocalDate checkIn, LocalDate checkOut) {
+	public void atualizarDatas(LocalDate checkIn, LocalDate checkOut) {
 
 		LocalDate agora = LocalDate.now();
 		if (checkIn.isBefore(agora) || checkOut.isBefore(agora)) {
-			return "Erro na reserva. Datas atualizadas devem ser futuras.";
+			throw new IllegalArgumentException("Erro na reserva. Datas atualizadas devem ser futuras.");
 		}
 		if (!checkOut.isAfter(checkIn)) {
-			return "Erro na reserva. Data de Check-Out deve ser posterior Check-In";
+			throw new IllegalArgumentException("Erro na reserva. Data de Check-Out deve ser posterior Check-In");
 		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		return null;
 	}
 
 	public String toString() {
