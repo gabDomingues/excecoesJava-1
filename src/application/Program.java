@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import model.entities.Reserva;
+import model.exceptions.DomainException;
 
 public class Program {
 
@@ -37,8 +38,11 @@ public class Program {
 		catch(DateTimeParseException e) {
 			System.out.println("Formato da Data Invalido!");
 		}
-		catch(IllegalArgumentException e) {
+		catch(DomainException e) {
 			System.out.println(e.getMessage());
+		}
+		catch(RuntimeException e) {
+			System.out.println("Erro inesperado.");
 		}
 		sc.close();
 	}
